@@ -29,8 +29,16 @@ export class Vector {
         }, 0);
     }
 
+    mult(scalar: number): Vector {
+        let ret: Vector = new Vector(this.vals.length);
+        this.vals.forEach((val: number, i: number) => {
+            ret.vals[i] = val * scalar;
+        });
+        return ret;
+    }
+
     sum(vec: Vector): Vector {
-        let vec_sum = new Vector(vec.length()); 
+        let vec_sum: Vector = new Vector(vec.length()); 
         for (let i = 0; i < vec.length(); i++) {
             vec_sum.set(i, (vec.get(i) + this.get(i)));
         }
@@ -38,18 +46,19 @@ export class Vector {
     }
 
     dot(vec: Vector): number {
-        let vec_dot = new Vector(vec.length()); 
+        let vec_dot: Vector = new Vector(vec.length()); 
         for (let i = 0; i < vec.length(); i++) {
             vec_dot.set(i, (vec.get(i) * this.get(i)));
         }
         return vec_dot.total();
     }
 
-    static create(vals: number[]) {
-        const ret: Vector = new Vector(vals.length)
-        vals.forEach((val: number, index: number) => {
-            ret.vals[index] = val;
-        })
-        return ret;
+    zero(): boolean {
+        this.vals.forEach((val: number) => {
+            if (val !== 0) {
+                return false;
+            }
+        });
+        return true;
     }
 }
