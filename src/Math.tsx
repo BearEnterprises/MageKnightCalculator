@@ -5,6 +5,10 @@ export class Vector {
         this.vals = new Array(dims);
     }
 
+    length(): number {
+        return this.vals.length;
+    }
+
     set(i: number, val: number) {
         if (i < 0 || i >= this.vals.length) {
             throw new Error("Invalid provided index");
@@ -19,10 +23,26 @@ export class Vector {
         return this.vals[i];
     }
 
-    sum(): number {
+    total(): number {
         return this.vals.reduce((acc: number, val: number) => {
             return acc + val;
         }, 0);
+    }
+
+    sum(vec: Vector): Vector {
+        let vec_sum = new Vector(vec.length()); 
+        for (let i = 0; i < vec.length(); i++) {
+            vec_sum.set(i, (vec.get(i) + this.get(i)));
+        }
+        return vec_sum;
+    }
+
+    dot(vec: Vector): number {
+        let vec_dot = new Vector(vec.length()); 
+        for (let i = 0; i < vec.length(); i++) {
+            vec_dot.set(i, (vec.get(i) * this.get(i)));
+        }
+        return vec_dot.total();
     }
 
     static create(vals: number[]) {
