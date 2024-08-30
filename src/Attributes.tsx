@@ -1,11 +1,5 @@
 import { Vector } from "./Math";
-
-enum Phases {
-    RangedSeige,
-    Block,
-    AssignDamage,
-    Attack,
-}
+import { Damage, Phases } from "./Enums";
 
 const ATTACK = 0;
 const DEFENSE = 1;
